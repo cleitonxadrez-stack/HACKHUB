@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="../images/logo-hackhub.png">
+  <title>Dashboard da Equipe — HACK HUB®</title>
+  <meta name="description" content="Visão geral da equipe: IIH atual, missão em andamento, pontos e posição no ranking geral do Ecossistema HACK BRASIL.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="bg-slate-50" data-page="app-dashboard">
+
+  <!-- TOP BAR DO APP -->
+  <header class="sticky top-0 z-40 bg-black text-white">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <a href="../index.html" class="flex items-center gap-2.5 shrink-0">
+          <span class="font-display font-bold text-base leading-tight">HACK HUB<sup class="text-[10px]">®</sup></span>
+        </a>
+        <div class="flex items-center gap-2 text-xs sm:text-sm text-white/70">
+          <i class="fa-solid fa-chevron-right text-[10px]"></i>
+          <span class="font-medium text-brand-yellow">Dashboard da Equipe</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span id="topbar-equipe-name" class="hidden sm:inline text-sm text-white/80 truncate max-w-[200px]"></span>
+          <button id="btn-trocar-equipe" class="hidden text-xs font-semibold px-3 py-2 rounded-lg border border-white/20 hover:border-brand-yellow hover:text-brand-yellow transition-colors whitespace-nowrap">
+            <i class="fa-solid fa-people-arrows mr-1"></i> Trocar equipe
+          </button>
+          <a href="clube.html" class="text-xs font-semibold px-3 py-2 rounded-lg border border-white/20 hover:border-brand-yellow hover:text-brand-yellow transition-colors whitespace-nowrap">
+            <i class="fa-solid fa-house-flag mr-1"></i> Painel do Clube
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
+
+    <!-- ============ VIEW: CARREGANDO ============ -->
+    <section id="view-loading" class="text-center py-24">
+      <i class="fa-solid fa-spinner fa-spin text-3xl text-brand-yellow-dark mb-3"></i>
+      <p class="text-slate-500 text-sm">Carregando o dashboard da equipe...</p>
+    </section>
+
+    <!-- ============ VIEW: ERRO AO CARREGAR ============ -->
+    <section id="view-erro" class="hidden max-w-xl mx-auto text-center py-16">
+      <div class="w-16 h-16 rounded-2xl bg-red-50 text-red-400 flex items-center justify-center text-2xl mx-auto mb-4"><i class="fa-solid fa-triangle-exclamation"></i></div>
+      <h1 class="font-display text-xl font-bold text-slate-900 mb-2">Não foi possível carregar o dashboard</h1>
+      <p class="text-slate-500 text-sm mb-6">Verifique sua conexão com a internet e tente novamente.</p>
+      <button id="btn-tentar-novamente" class="btn-accent px-6 py-3 rounded-lg font-semibold inline-flex items-center gap-2"><i class="fa-solid fa-rotate-right"></i> Tentar novamente</button>
+    </section>
+
+    <!-- ============ VIEW: SEM CLUBE ATIVO ============ -->
+    <section id="view-sem-clube" class="hidden max-w-xl mx-auto text-center py-16">
+      <div class="w-16 h-16 rounded-2xl bg-slate-100 text-slate-400 flex items-center justify-center text-2xl mx-auto mb-4"><i class="fa-solid fa-house-circle-xmark"></i></div>
+      <h1 class="font-display text-xl font-bold text-slate-900 mb-2">Nenhum clube ativo encontrado</h1>
+      <p class="text-slate-500 text-sm mb-6">Para ver o dashboard da equipe, primeiro crie ou acesse o seu HACK CLUB.</p>
+      <a href="clube.html" class="btn-accent px-6 py-3 rounded-lg font-semibold inline-flex items-center gap-2">Ir para o Painel do Clube <i class="fa-solid fa-arrow-right text-sm"></i></a>
+    </section>
+
+    <!-- ============ VIEW: SEM EQUIPE APROVADA ============ -->
+    <section id="view-sem-equipe" class="hidden max-w-xl mx-auto text-center py-16">
+      <div class="w-16 h-16 rounded-2xl bg-slate-100 text-slate-400 flex items-center justify-center text-2xl mx-auto mb-4"><i class="fa-solid fa-people-group"></i></div>
+      <h1 class="font-display text-xl font-bold text-slate-900 mb-2">Nenhuma equipe aprovada ainda</h1>
+      <p class="text-slate-500 text-sm mb-6">O Dashboard aparece depois que uma equipe é aprovada no Painel do Clube.</p>
+      <a href="clube.html" class="btn-accent px-6 py-3 rounded-lg font-semibold inline-flex items-center gap-2">Ir para o Painel do Clube <i class="fa-solid fa-arrow-right text-sm"></i></a>
+    </section>
+
+    <!-- ============ VIEW: ESCOLHER EQUIPE ============ -->
+    <section id="view-escolher-equipe" class="hidden max-w-xl mx-auto">
+      <div class="text-center mb-8">
+        <span class="badge badge-yellow mb-3"><i class="fa-solid fa-people-group mr-1.5"></i> Escolha a equipe</span>
+        <h1 class="font-display text-2xl font-bold text-slate-900">De qual equipe você quer ver o dashboard?</h1>
+      </div>
+      <div id="lista-escolher-equipe" class="space-y-3"></div>
+    </section>
+
+    <!-- ============ VIEW: DASHBOARD ============ -->
+    <section id="view-dashboard" class="hidden">
+
+      <div class="gradient-hero rounded-3xl p-6 sm:p-8 mb-8 relative overflow-hidden text-white">
+        <div class="relative flex flex-wrap items-center justify-between gap-4">
+          <div>
+            <span class="badge badge-yellow mb-2"><i class="fa-solid fa-chart-line mr-1.5"></i> Dashboard da Equipe</span>
+            <h1 class="font-display text-2xl sm:text-3xl font-bold leading-tight"><span id="equipe-nome"></span></h1>
+            <p id="equipe-escola" class="text-slate-300 text-sm mt-1"></p>
+          </div>
+          <div class="text-right shrink-0">
+            <p id="ranking-posicao" class="font-display text-3xl font-bold text-brand-yellow">—</p>
+            <p class="text-xs text-slate-300 uppercase tracking-wide">posição no ranking geral</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pontos por módulo -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
+        <div class="app-card text-center">
+          <p id="stat-pontos-discovery" class="text-2xl font-bold text-slate-900">0</p>
+          <p class="text-xs text-slate-500 uppercase tracking-wide mt-1"><i class="fa-solid fa-earth-americas mr-1 text-brand-yellow-dark"></i>Discovery</p>
+        </div>
+        <div class="app-card text-center">
+          <p id="stat-pontos-banco-hack" class="text-2xl font-bold text-slate-900">0</p>
+          <p class="text-xs text-slate-500 uppercase tracking-wide mt-1"><i class="fa-solid fa-cube mr-1 text-brand-yellow-dark"></i>Banco HACK</p>
+        </div>
+        <div class="app-card text-center">
+          <p id="stat-pontos-builder" class="text-2xl font-bold text-slate-900">0</p>
+          <p class="text-xs text-slate-500 uppercase tracking-wide mt-1"><i class="fa-solid fa-screwdriver-wrench mr-1 text-brand-yellow-dark"></i>Builder</p>
+        </div>
+        <div class="app-card text-center" style="border:2px solid var(--hh-yellow);">
+          <p id="stat-pontos-total" class="text-2xl font-bold text-slate-900">0</p>
+          <p class="text-xs text-slate-500 uppercase tracking-wide mt-1"><i class="fa-solid fa-star mr-1 text-brand-yellow-dark"></i>Total</p>
+        </div>
+      </div>
+
+      <div class="grid sm:grid-cols-2 gap-6 mb-8">
+
+        <!-- Jornada Discovery: missão em andamento / IIH -->
+        <div class="app-card">
+          <h2 class="font-display text-lg font-bold text-slate-900 mb-4"><i class="fa-solid fa-magnifying-glass mr-2 text-brand-yellow-dark"></i>Jornada Discovery</h2>
+          <div id="discovery-sem-projeto" class="hidden text-center py-6">
+            <p class="text-sm text-slate-500 mb-4">Esta equipe ainda não iniciou a Jornada Discovery.</p>
+            <a href="discovery.html" class="btn-accent px-5 py-2.5 rounded-lg text-sm font-semibold inline-flex items-center gap-2">Iniciar Jornada <i class="fa-solid fa-arrow-right text-xs"></i></a>
+          </div>
+          <div id="discovery-conteudo" class="hidden">
+            <div class="progress-track mb-2"><div id="discovery-progress-fill" class="progress-fill" style="width:0%"></div></div>
+            <p class="text-xs text-slate-500 mb-4"><span id="discovery-missoes-concluidas">0</span>/10 missões concluídas</p>
+            <div id="discovery-missao-atual-card" class="rounded-xl bg-slate-50 p-4 mb-4">
+              <p class="text-xs font-semibold text-brand-yellow-dark uppercase tracking-wide mb-1">Missão em andamento</p>
+              <p id="discovery-missao-atual-titulo" class="font-semibold text-slate-900 text-sm"></p>
+            </div>
+            <div id="discovery-iih-card" class="hidden rounded-xl p-4 flex items-center gap-4" style="background:#101010;">
+              <div id="discovery-selo-emoji" class="w-12 h-12 rounded-xl flex items-center justify-center text-xl shrink-0"></div>
+              <div>
+                <p class="text-xs text-brand-yellow font-semibold uppercase tracking-wide">IIH real do projeto</p>
+                <p id="discovery-iih-total" class="font-display text-xl font-bold text-white"></p>
+              </div>
+            </div>
+            <a href="discovery.html" class="text-sm font-semibold text-brand-yellow-dark hover:underline inline-flex items-center gap-1.5 mt-4"><i class="fa-solid fa-arrow-right text-xs"></i> Continuar Jornada Discovery</a>
+          </div>
+        </div>
+
+        <!-- Banco HACK + Builder resumo -->
+        <div class="app-card">
+          <h2 class="font-display text-lg font-bold text-slate-900 mb-4"><i class="fa-solid fa-puzzle-piece mr-2 text-brand-yellow-dark"></i>Banco HACK &amp; Builder</h2>
+          <div class="space-y-4">
+            <div class="flex items-center justify-between rounded-xl bg-slate-50 p-4">
+              <div>
+                <p class="text-sm font-semibold text-slate-900">Desafios resolvidos</p>
+                <p class="text-xs text-slate-500"><span id="banco-hack-qtd">0</span> desafio(s) concluído(s)</p>
+              </div>
+              <a href="banco-hack.html" class="btn-outline px-4 py-2 rounded-lg text-xs font-semibold shrink-0">Resolver mais <i class="fa-solid fa-arrow-right ml-1"></i></a>
+            </div>
+            <div class="flex items-center justify-between rounded-xl bg-slate-50 p-4">
+              <div>
+                <p class="text-sm font-semibold text-slate-900">Competências desbloqueadas</p>
+                <p class="text-xs text-slate-500"><span id="builder-qtd">0</span>/20 competência(s) concluída(s)</p>
+              </div>
+              <a href="builder.html" class="btn-outline px-4 py-2 rounded-lg text-xs font-semibold shrink-0">Continuar <i class="fa-solid fa-arrow-right ml-1"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA para ranking completo -->
+      <div class="rounded-2xl bg-black text-white p-6 sm:p-8 flex items-center gap-6 flex-wrap justify-between">
+        <div class="flex items-center gap-5">
+          <div class="w-14 h-14 rounded-2xl bg-brand-yellow text-black flex items-center justify-center text-xl shrink-0"><i class="fa-solid fa-ranking-star"></i></div>
+          <div>
+            <p class="text-brand-yellow font-semibold text-sm mb-1">Ranking geral do Ecossistema HACK BRASIL</p>
+            <p class="font-medium">Veja como sua equipe se compara com todas as outras equipes e escolas.</p>
+          </div>
+        </div>
+        <a href="../ranking.html" class="btn-accent px-6 py-3 rounded-lg font-semibold inline-flex items-center gap-2 shrink-0">Ver ranking completo <i class="fa-solid fa-arrow-right text-sm"></i></a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- TOAST -->
+  <div id="toast" class="hidden fixed bottom-5 left-1/2 -translate-x-1/2 bg-black text-white px-5 py-3 rounded-full shadow-lg text-sm font-medium flex items-center gap-2 z-50"></div>
+
+  <script src="../js/app-dashboard.js"></script>
+</body>
+</html>

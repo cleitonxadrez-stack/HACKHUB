@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="../images/logo-hackhub.png">
+  <title>Ficha pública do Clube — HACK HUB®</title>
+  <meta name="description" content="Conheça este HACK CLUB: professores mentores, equipes e estudantes — informações públicas para inscrições e parcerias (ex.: HACK Festival).">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="bg-slate-50" data-page="app-clube-publico">
+
+  <!-- TOP BAR -->
+  <header class="bg-black text-white no-print">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <a href="../index.html" class="flex items-center gap-2.5 shrink-0">
+          <span class="font-display font-bold text-base leading-tight">HACK HUB<sup class="text-[10px]">®</sup></span>
+        </a>
+        <div class="flex items-center gap-3">
+          <span class="hidden sm:inline text-xs sm:text-sm text-white/60 font-medium"><i class="fa-solid fa-eye mr-1.5"></i>Ficha pública do clube</span>
+          <button id="btn-imprimir" class="no-print text-xs font-semibold px-3 py-2 rounded-lg border border-white/20 hover:border-brand-yellow hover:text-brand-yellow transition-colors whitespace-nowrap">
+            <i class="fa-solid fa-print mr-1.5"></i> Imprimir / Salvar PDF
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
+
+    <!-- LOADING -->
+    <div id="view-loading" class="text-center py-24">
+      <i class="fa-solid fa-spinner fa-spin text-3xl text-brand-yellow-dark mb-3"></i>
+      <p class="text-slate-500 text-sm">Carregando informações do clube...</p>
+    </div>
+
+    <!-- NÃO ENCONTRADO -->
+    <div id="view-nao-encontrado" class="hidden text-center py-24 max-w-md mx-auto">
+      <div class="w-16 h-16 rounded-2xl bg-slate-100 text-slate-400 flex items-center justify-center text-2xl mx-auto mb-4"><i class="fa-solid fa-circle-question"></i></div>
+      <h1 class="font-display text-xl font-bold text-slate-900 mb-2">Clube não encontrado</h1>
+      <p class="text-slate-500 text-sm">Verifique se o link está correto ou peça um novo link de compartilhamento ao responsável pelo clube.</p>
+    </div>
+
+    <!-- CONTEÚDO PÚBLICO -->
+    <section id="view-clube" class="hidden">
+
+      <!-- Hero do clube -->
+      <div class="public-hero-card p-6 sm:p-9 mb-8 text-white">
+        <div class="relative flex flex-wrap items-center gap-6 justify-between">
+          <div class="flex items-center gap-5">
+            <img id="clube-logo-img" src="" alt="Logo do clube" class="avatar-img w-20 h-20 sm:w-24 sm:h-24" style="display:none;">
+            <div id="clube-logo-fallback" class="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-brand-yellow text-black flex items-center justify-center text-2xl sm:text-3xl font-bold shrink-0"><i class="fa-solid fa-house-flag"></i></div>
+            <div>
+              <span id="clube-status-badge" class="badge badge-yellow mb-2"></span>
+              <h1 id="clube-nome" class="font-display text-2xl sm:text-3xl font-bold leading-tight"></h1>
+              <p id="clube-escola" class="text-slate-300 text-sm mt-1"></p>
+            </div>
+          </div>
+        </div>
+        <p id="clube-descricao" class="text-slate-300 text-sm mt-5 relative max-w-2xl"></p>
+        <div id="clube-social-links" class="flex items-center gap-2 mt-4 relative flex-wrap"></div>
+      </div>
+
+      <!-- Estatísticas rápidas -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-10">
+        <div class="app-card text-center">
+          <p id="stat-mentores" class="text-2xl font-bold text-slate-900">0</p>
+          <p class="text-xs text-slate-500 uppercase tracking-wide mt-1">Professores mentores</p>
+        </div>
+        <div class="app-card text-center">
+          <p id="stat-estudantes" class="text-2xl font-bold text-slate-900">0</p>
+          <p class="text-xs text-slate-500 uppercase tracking-wide mt-1">Estudantes</p>
+        </div>
+        <div class="app-card text-center">
+          <p id="stat-equipes" class="text-2xl font-bold text-slate-900">0</p>
+          <p class="text-xs text-slate-500 uppercase tracking-wide mt-1">Equipes</p>
+        </div>
+        <div class="app-card text-center">
+          <p id="stat-aprovadas" class="text-2xl font-bold text-brand-yellow-dark">0</p>
+          <p class="text-xs text-slate-500 uppercase tracking-wide mt-1">Equipes aprovadas</p>
+        </div>
+      </div>
+
+      <!-- Professores mentores -->
+      <div class="mb-10">
+        <h2 class="font-display text-lg font-bold text-slate-900 mb-5"><i class="fa-solid fa-chalkboard-user mr-2 text-brand-yellow-dark"></i>Professores mentores</h2>
+        <div id="lista-mentores" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+        <p id="empty-mentores" class="hidden text-center text-slate-400 text-sm py-6">Nenhum professor mentor cadastrado ainda.</p>
+      </div>
+
+      <!-- Equipes -->
+      <div class="mb-10">
+        <h2 class="font-display text-lg font-bold text-slate-900 mb-5"><i class="fa-solid fa-people-group mr-2 text-brand-yellow-dark"></i>Equipes</h2>
+        <div id="lista-equipes" class="grid sm:grid-cols-2 gap-6"></div>
+        <p id="empty-equipes" class="hidden text-center text-slate-400 text-sm py-6">Nenhuma equipe criada ainda.</p>
+      </div>
+
+      <!-- Rodapé -->
+      <div class="rounded-2xl bg-black text-white p-6 sm:p-8 flex items-center gap-5 flex-wrap justify-between">
+        <div class="flex items-center gap-4">
+          <div class="w-12 h-12 rounded-2xl bg-brand-yellow text-black flex items-center justify-center text-lg shrink-0"><i class="fa-solid fa-house-flag"></i></div>
+          <p class="text-sm text-slate-300">Esta é uma ficha pública gerada pelo <span class="text-brand-yellow font-semibold">HACK HUB®</span>, o painel de gestão do Ecossistema HACK BRASIL.</p>
+        </div>
+        <a href="../index.html" class="no-print btn-outline px-5 py-2.5 rounded-lg text-sm font-semibold shrink-0 text-white border-white/30 hover:border-brand-yellow hover:text-brand-yellow">Conhecer o HACK HUB</a>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const btn = document.getElementById('btn-imprimir');
+      if (btn) btn.addEventListener('click', () => window.print());
+    });
+  </script>
+  <script src="../js/app-clube-publico.js"></script>
+</body>
+</html>
