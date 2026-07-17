@@ -1,15 +1,14 @@
 /* ==========================================================================
    HACK HUB® — Banco HACK (app funcional)
-   Desafios reais com cálculo automático do Índice de Impacto HACK (IIH),
-   seguindo fielmente a metodologia descrita em iih.html:
-   - Compreensão do Problema (10%) + Impacto ODS (40%) + Planejamento (25%) + Ferramentas (25%)
-   - Pontuação ODS = (ODS Diretos × 3 + ODS Indiretos × 1) × Multiplicador de Profundidade
-   - Selos: Bronze / Prata / Ouro / Diamante
-   Persistência via Table API (tables/hack_desafios, hack_alternativas, hack_submissoes)
+   VERSÃO MODIFICADA: Usa JSON local em vez de API do Gemini
    ========================================================================== */
 
 const STORAGE_CLUBE_KEY = 'hh_clube_ativo_id';
-const STORAGE_EQUIPE_KEY = 'hh_equipe_discovery_id'; // mesma equipe ativa usada no Discovery
+const STORAGE_EQUIPE_KEY = 'hh_equipe_discovery_id';
+const BANCO_DADOS_URL = '../dados/hackhub-export-2026-07-17-05-33-35.json'; // 👈 CAMINHO DO ARQUIVO JSON
+
+// Cache global para os dados
+let BANCO_DADOS_GLOBAL = null;
 
 const state = {
   clube: null,
@@ -17,22 +16,17 @@ const state = {
   equipeAtiva: null,
   desafios: [],
   alternativas: [],
-  submissoes: [], // submissões já feitas por esta equipe
+  submissoes: [],
   categoriaFiltro: 'Todas',
   nivelFiltro: 'Todos',
-  sessao: null, // { desafio, causasEmbaralhadas, causaSelecionadas, alternativaId, planejamentoSelecionado, ferramentasSelecionadas }
+  sessao: null,
 };
 
-// Ordem, estilo visual e pontuação HACK (gamificação/ranking) de cada nível de dificuldade
 const NIVEL_INFO = {
   'Fácil': { classe: 'nivel-facil', ordem: 1, icone: 'fa-solid fa-seedling', pontos: 10 },
   'Médio': { classe: 'nivel-medio', ordem: 2, icone: 'fa-solid fa-fire', pontos: 20 },
   'Difícil': { classe: 'nivel-dificil', ordem: 3, icone: 'fa-solid fa-bolt', pontos: 30 },
 };
-
-/* --------------------------------------------------------------------------
-   Listas fixas da metodologia (mesmas para todos os desafios)
-   -------------------------------------------------------------------------- */
 
 const ETAPAS_PLANEJAMENTO = [
   'Definir o problema e a causa raiz',
@@ -86,20 +80,6 @@ function showToast(msg, icon = 'fa-solid fa-circle-check') {
   window.__toastTimer = setTimeout(() => toast.classList.add('hidden'), 3200);
 }
 
-async function api(path, opts = {}) {
-  const res = await fetch(`../tables/${path}`, {
-    headers: { 'Content-Type': 'application/json' },
-    ...opts,
-  });
-  if (res.status === 204) return null;
-  if (!res.ok) {
-    const err = new Error(`Erro na API: ${res.status}`);
-    err.status = res.status;
-    throw err;
-  }
-  return res.json();
-}
-
 function shuffle(arr) {
   const a = [...arr];
   for (let i = a.length - 1; i > 0; i--) {
@@ -107,6 +87,101 @@ function shuffle(arr) {
     [a[i], a[j]] = [a[j], a[i]];
   }
   return a;
+}
+
+/* --------------------------------------------------------------------------
+   NOVO: Carregar dados do JSON local
+   -------------------------------------------------------------------------- */
+
+async function carregarBancoDados() {
+  if (BANCO_DADOS_GLOBAL) return BANCO_DADOS_GLOBAL;
+  
+  try {
+    const response = await fetch(BANCO_DADOS_URL);
+    if (!response.ok) throw new Error(`Erro ao carregar JSON: ${response.status}`);
+    BANCO_DADOS_GLOBAL = await response.json();
+    return BANCO_DADOS_GLOBAL;
+  } catch (err) {
+    console.error('Erro ao carregar banco de dados:', err);
+    throw err;
+  }
+}
+
+// Simulação da API antiga — agora busca do JSON
+async function api(path, opts = {}) {
+  const bd = await carregarBancoDados();
+  
+  // Se for GET, retorna os dados da tabela
+  if (!opts.method || opts.method === 'GET') {
+    const partes = path.split('?');
+    const recurso = partes[0]; // ex: "hack_desafios", "hack_desafios/123"
+    
+    // Parsing de querys (limit, filter, etc)
+    const queryStr = partes[1] || '';
+    const params = new URLSearchParams(queryStr);
+    
+    const [tabela, id] = recurso.split('/');
+    const dados = bd[tabela] || [];
+    
+    if (id) {
+      // GET específico: hack_desafios/123
+      const item = dados.find(d => d.id === id);
+      if (!item) {
+        const err = new Error(`Não encontrado: ${recurso}`);
+        err.status = 404;
+        throw err;
+      }
+      return item;
+    }
+    
+    // GET lista: hack_desafios?limit=200
+    return {
+      data: dados,
+      results: dados
+    };
+  }
+  
+  // Se for POST/PATCH, simula salvamento localmente
+  if (opts.method === 'POST' || opts.method === 'PATCH') {
+    const payload = JSON.parse(opts.body || '{}');
+    
+    // Para submissões, cria um ID novo se for POST
+    if (opts.method === 'POST') {
+      const id = 'sub-' + Date.now() + '-' + Math.random().toString(36).slice(2, 9);
+      const novaSubmissao = {
+        id,
+        ...payload,
+        created_at: Date.now(),
+        updated_at: Date.now()
+      };
+      // Simula salvamento (em produção, seria enviado para o servidor)
+      BANCO_DADOS_GLOBAL.hack_submissoes = BANCO_DADOS_GLOBAL.hack_submissoes || [];
+      BANCO_DADOS_GLOBAL.hack_submissoes.push(novaSubmissao);
+      return novaSubmissao;
+    }
+    
+    // Para PATCH, atualiza a submissão existente
+    if (opts.method === 'PATCH') {
+      const partes = path.split('/');
+      const id = partes[partes.length - 1];
+      const submissoes = BANCO_DADOS_GLOBAL.hack_submissoes || [];
+      const idx = submissoes.findIndex(s => s.id === id);
+      if (idx === -1) {
+        const err = new Error(`Submissão não encontrada: ${id}`);
+        err.status = 404;
+        throw err;
+      }
+      const atualizada = {
+        ...submissoes[idx],
+        ...payload,
+        updated_at: Date.now()
+      };
+      submissoes[idx] = atualizada;
+      return atualizada;
+    }
+  }
+  
+  throw new Error(`Método não suportado: ${opts.method}`);
 }
 
 /* --------------------------------------------------------------------------
@@ -223,7 +298,6 @@ function showTopbarEquipe() {
 function submissaoDoDesafio(desafioId) {
   const doDesafio = state.submissoes.filter(s => s.desafio_id === desafioId);
   if (doDesafio.length === 0) return null;
-  // retorna a mais recente
   return doDesafio.sort((a, b) => (b.created_at || 0) - (a.created_at || 0))[0];
 }
 
@@ -242,7 +316,6 @@ function renderLista() {
     });
   });
 
-  // Filtro por nível de dificuldade (Fácil/Médio/Difícil), na ordem certa
   const niveisPresentes = Array.from(new Set(state.desafios.map(d => d.nivel).filter(Boolean)));
   niveisPresentes.sort((a, b) => (NIVEL_INFO[a]?.ordem || 99) - (NIVEL_INFO[b]?.ordem || 99));
   const niveis = ['Todos', ...niveisPresentes];
@@ -322,8 +395,6 @@ function abrirDesafio(desafioId, opts = {}) {
   const desafio = state.desafios.find(d => d.id === desafioId);
   if (!desafio) return;
 
-  // Ao "refazer", ignora a submissão existente apenas para decidir a etapa inicial,
-  // mas mantém a referência para que finalizarDesafio() faça PATCH (atualização) em vez de criar duplicada.
   const submissaoExistente = submissaoDoDesafio(desafioId);
   const forcarReinicio = !!opts.reiniciar;
 
@@ -681,7 +752,7 @@ function wireEtapaAtual() {
 
 function calcularNotaCompreensao(sessao) {
   const totalReal = sessao.causas.filter(c => c.real).length;
-  if (totalReal === 0) return 10; // se o desafio não tiver causas configuradas, não penaliza
+  if (totalReal === 0) return 10;
   let pontos = 0;
   sessao.causasSelecionadas.forEach(idx => {
     pontos += sessao.causas[idx].real ? 1 : -1;
@@ -708,7 +779,6 @@ function calcularSelo(alternativa, pontosBrutosOds) {
 }
 
 function pesosMatriz(matrizArray, listaFixa) {
-  // matrizArray: [{etapa/ferramenta, classificacao}]; retorna map texto->pontos
   const map = {};
   listaFixa.forEach(item => { map[item] = 0; });
   (matrizArray || []).forEach(entry => {
@@ -749,8 +819,6 @@ async function finalizarDesafio() {
 
   const causasTextos = sessao.causasSelecionadas.map(i => sessao.causas[i].texto);
 
-  // Pontos HACK (gamificação/ranking) — fixos por nível de dificuldade do desafio,
-  // concedidos apenas uma vez por desafio+equipe (não duplica ao "Refazer").
   const nivelDesafio = sessao.desafio.nivel;
   const pontosDoNivel = (NIVEL_INFO[nivelDesafio] || {}).pontos || 0;
   const jaTinhaPontos = !!sessao.submissaoExistente;
@@ -774,7 +842,6 @@ async function finalizarDesafio() {
     pontos_ganhos: pontosGanhos,
   };
 
-  // Se já existe submissão anterior para este desafio+equipe, atualiza; senão cria.
   let updated;
   if (sessao.submissaoExistente) {
     updated = await api(`hack_submissoes/${sessao.submissaoExistente.id}`, { method: 'PATCH', body: JSON.stringify(payload) });
