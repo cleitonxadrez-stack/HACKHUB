@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="images/logo-hackhub.png">
+  <title>HACK HUB® — Plataforma de Desafios, Ideias e Projetos do HACK BRASIL</title>
+  <meta name="description" content="O HACK HUB é a plataforma que organiza toda a metodologia do HACK BRASIL: crie equipes, participe de desafios, desenvolva projetos e acompanhe sua evolução pelo Índice de Impacto HACK (IIH).">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="home">
+
+  <div id="header-placeholder"></div>
+
+  <main>
+    <!-- HERO -->
+    <section id="hero" class="gradient-hero relative overflow-hidden">
+      <div class="absolute inset-0 opacity-20 bg-[url('images/hero-hackhub-capa-v4.jpg')] bg-cover bg-center"></div>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28 relative">
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+          <div class="fade-in-up text-white">
+            <span class="badge badge-yellow mb-6"><i class="fa-solid fa-bolt mr-1.5"></i> Ecossistema HACK BRASIL</span>
+            <h1 class="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight mb-6">
+              HACK HUB<span class="text-brand-yellow-dark">®</span>
+            </h1>
+            <p class="text-lg sm:text-xl text-slate-200 mb-2 font-medium">
+              Plataforma de Desafios, Ideias e Projetos do HACK BRASIL
+            </p>
+            <p class="text-base sm:text-lg text-slate-300 mb-8 max-w-lg">
+              Transforme problemas em soluções. Organize equipes, desenvolva projetos, participe de desafios e acompanhe a evolução por meio do Índice de Impacto HACK (IIH).
+            </p>
+            <div class="flex flex-wrap gap-4">
+              <a href="#jornada-detalhe" class="btn-accent px-7 py-3.5 rounded-lg font-semibold inline-flex items-center gap-2">
+                <i class="fa-solid fa-rocket"></i> Conhecer a Plataforma
+              </a>
+              <a href="app/login.html" class="btn-outline px-7 py-3.5 rounded-lg font-semibold inline-flex items-center gap-2">
+                <i class="fa-solid fa-play"></i> Acessar o HACK HUB
+              </a>
+            </div>
+            <div class="flex items-center gap-8 mt-10 text-slate-200">
+              <div>
+                <p class="text-2xl font-bold text-white"><span data-counter="6">0</span>+</p>
+                <p class="text-xs uppercase tracking-wide">Etapas da jornada</p>
+              </div>
+              <div class="w-px h-10 bg-white/20"></div>
+              <div>
+                <p class="text-2xl font-bold text-white"><span data-counter="8">0</span></p>
+                <p class="text-xs uppercase tracking-wide">Indicadores do IIH</p>
+              </div>
+              <div class="w-px h-10 bg-white/20"></div>
+              <div>
+                <p class="text-2xl font-bold text-white"><span data-counter="3">0</span></p>
+                <p class="text-xs uppercase tracking-wide">Fases de evolução</p>
+              </div>
+            </div>
+          </div>
+          <div class="fade-in-up hidden lg:block">
+            <img src="images/hero-hackhub-capa-v4.jpg" alt="Equipe de estudantes e mentores do HACK HUB colaborando e celebrando juntos, com a marca HACK HUB em destaque" class="rounded-3xl shadow-2xl w-full h-[480px] object-cover ring-4 ring-brand-yellow/30">
+          </div>
+        </div>
+      </div>
+      <svg class="w-full text-white" viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 30L60 24C120 18 240 6 360 3C480 0 600 6 720 15C840 24 960 36 1080 39C1200 42 1320 36 1380 33L1440 30V60H1380C1320 60 1200 60 1080 60C960 60 840 60 720 60C600 60 480 60 360 60C240 60 120 60 60 60H0V30Z" fill="currentColor"/></svg>
+    </section>
+
+    <!-- SEGUNDA SEÇÃO: Jornada horizontal -->
+    <section id="jornada-visual" class="py-20 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <span class="badge badge-dark mb-4"><i class="fa-solid fa-route mr-1.5"></i> Metodologia HACK BRASIL</span>
+          <h2 class="font-display text-3xl sm:text-4xl font-bold text-slate-900 mb-4">
+            Uma jornada para desenvolver talentos.
+          </h2>
+          <p class="text-slate-600 text-lg">
+            O HACK HUB organiza toda a metodologia do HACK BRASIL em etapas, permitindo que estudantes evoluam da identificação de problemas até a criação de soluções com impacto real.
+          </p>
+        </div>
+
+        <div class="journey-timeline">
+          <a href="clube.html" class="journey-step fade-in-up">
+            <div class="journey-step-icon"><i class="fa-solid fa-users"></i></div>
+            <p class="font-semibold text-sm text-slate-900">Criando o Clube</p>
+          </a>
+          <i class="fa-solid fa-arrow-right journey-arrow"></i>
+          <a href="discovery.html" class="journey-step fade-in-up">
+            <div class="journey-step-icon"><i class="fa-solid fa-magnifying-glass"></i></div>
+            <p class="font-semibold text-sm text-slate-900">Discovery</p>
+          </a>
+          <i class="fa-solid fa-arrow-right journey-arrow"></i>
+          <a href="builder.html" class="journey-step fade-in-up">
+            <div class="journey-step-icon"><i class="fa-solid fa-screwdriver-wrench"></i></div>
+            <p class="font-semibold text-sm text-slate-900">Builder</p>
+          </a>
+          <i class="fa-solid fa-arrow-right journey-arrow"></i>
+          <a href="banco-hack.html" class="journey-step fade-in-up">
+            <div class="journey-step-icon"><i class="fa-solid fa-puzzle-piece"></i></div>
+            <p class="font-semibold text-sm text-slate-900">Banco HACK</p>
+          </a>
+          <i class="fa-solid fa-arrow-right journey-arrow"></i>
+          <a href="challenges.html" class="journey-step fade-in-up">
+            <div class="journey-step-icon"><i class="fa-solid fa-earth-americas"></i></div>
+            <p class="font-semibold text-sm text-slate-900">HACK Challenges</p>
+          </a>
+          <i class="fa-solid fa-arrow-right journey-arrow"></i>
+          <a href="festival.html" class="journey-step fade-in-up">
+            <div class="journey-step-icon"><i class="fa-solid fa-trophy"></i></div>
+            <p class="font-semibold text-sm text-slate-900">Festival</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- TERCEIRA SEÇÃO: Conheça a Jornada HACK -->
+    <section id="jornada-detalhe" class="py-20 bg-slate-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-2xl mx-auto mb-14">
+          <span class="badge badge-yellow mb-4"><i class="fa-solid fa-compass mr-1.5"></i> A metodologia completa</span>
+          <h2 class="font-display text-3xl sm:text-4xl font-bold text-slate-900">Conheça a Jornada HACK</h2>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <a href="clube.html" class="journey-card p-7 rounded-2xl bg-white shadow-sm fade-in-up block">
+            <div class="w-14 h-14 rounded-xl bg-black text-brand-yellow flex items-center justify-center text-2xl mb-5"><i class="fa-solid fa-users"></i></div>
+            <h3 class="font-semibold text-lg text-slate-900 mb-2">Criando o Clube</h3>
+            <p class="text-slate-500 text-sm leading-relaxed">Organize o HACK CLUB da sua escola, forme equipes, defina os perfis dos estudantes e prepare o ambiente para iniciar a metodologia.</p>
+          </a>
+          <a href="discovery.html" class="journey-card p-7 rounded-2xl bg-black text-white border-2 border-brand-yellow fade-in-up block">
+            <div class="w-14 h-14 rounded-xl bg-brand-yellow text-black flex items-center justify-center text-2xl mb-5"><i class="fa-solid fa-rocket"></i></div>
+            <h3 class="font-semibold text-lg text-brand-yellow mb-2">Jornada HACK Discovery</h3>
+            <p class="text-white/80 text-sm leading-relaxed">A primeira etapa da metodologia. As equipes aprendem a identificar problemas, pesquisar, desenvolver soluções, construir um MVP e apresentar seu primeiro projeto.</p>
+          </a>
+          <a href="builder.html" class="journey-card p-7 rounded-2xl bg-white shadow-sm fade-in-up block">
+            <div class="w-14 h-14 rounded-xl bg-black/5 text-black flex items-center justify-center text-2xl mb-5"><i class="fa-solid fa-screwdriver-wrench"></i></div>
+            <h3 class="font-semibold text-lg text-slate-900 mb-2">Jornada HACK Builder</h3>
+            <p class="text-slate-500 text-sm leading-relaxed">Uma jornada de aperfeiçoamento, onde as equipes desenvolvem competências em inovação, tecnologia, Inteligência Artificial, empreendedorismo e gestão de projetos.</p>
+          </a>
+          <a href="banco-hack.html" class="journey-card p-7 rounded-2xl bg-white shadow-sm fade-in-up block">
+            <div class="w-14 h-14 rounded-xl bg-brand-yellow/20 text-brand-yellow-dark flex items-center justify-center text-2xl mb-5"><i class="fa-solid fa-puzzle-piece"></i></div>
+            <h3 class="font-semibold text-lg text-slate-900 mb-2">Banco HACK</h3>
+            <p class="text-slate-500 text-sm leading-relaxed">Uma biblioteca de desafios rápidos para desenvolver criatividade, colaboração, pensamento crítico e resolução de problemas antes de enfrentar desafios reais.</p>
+          </a>
+          <a href="challenges.html" class="journey-card p-7 rounded-2xl bg-white shadow-sm fade-in-up block">
+            <div class="w-14 h-14 rounded-xl bg-black/5 text-black flex items-center justify-center text-2xl mb-5"><i class="fa-solid fa-earth-americas"></i></div>
+            <h3 class="font-semibold text-lg text-slate-900 mb-2">HACK Challenges</h3>
+            <p class="text-slate-500 text-sm leading-relaxed">Um ambiente de inovação aberta onde empresas, organizações e comunidades publicam desafios reais para que equipes desenvolvam soluções com potencial de implementação.</p>
+          </a>
+          <a href="festival.html" class="journey-card p-7 rounded-2xl bg-white shadow-sm fade-in-up block">
+            <div class="w-14 h-14 rounded-xl bg-brand-yellow/20 text-brand-yellow-dark flex items-center justify-center text-2xl mb-5"><i class="fa-solid fa-trophy"></i></div>
+            <h3 class="font-semibold text-lg text-slate-900 mb-2">HACK Festival</h3>
+            <p class="text-slate-500 text-sm leading-relaxed">O momento em que as equipes apresentam seus projetos, compartilham soluções, recebem avaliações e demonstram o impacto gerado durante a jornada.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUARTA SEÇÃO: IIH -->
+    <section id="iih" class="py-20 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid lg:grid-cols-2 gap-14 items-center">
+          <div>
+            <span class="badge badge-dark mb-4"><i class="fa-solid fa-earth-americas mr-1.5"></i> Do local ao global</span>
+            <h2 class="font-display text-3xl sm:text-4xl font-bold text-slate-900 mb-5">
+              Índice de Impacto HACK (IIH)
+            </h2>
+            <p class="text-slate-900 font-semibold text-lg mb-4 leading-relaxed">
+              Transforme soluções locais em impacto global.
+            </p>
+            <p class="text-slate-600 mb-4 leading-relaxed">
+              O IIH mede a profundidade das ideias dos estudantes conectando cada projeto aos Objetivos de Desenvolvimento Sustentável (ODS) da ONU. Da solução paliativa à transformadora, cada escolha gera um selo de impacto.
+            </p>
+            <p class="text-slate-900 font-semibold mb-8 leading-relaxed">
+              Porque no HACK HUB, aprender é transformar o mundo — e isso pode ser medido.
+            </p>
+            <a href="iih.html" class="btn-primary inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold">
+              Entenda o IIH <i class="fa-solid fa-arrow-right text-sm"></i>
+            </a>
+          </div>
+          <div>
+            <p class="font-semibold text-slate-900 mb-4">O IIH considera indicadores como:</p>
+            <div class="grid sm:grid-cols-2 gap-3">
+              <div class="iih-chip"><i class="fa-solid fa-flag-checkered text-brand-yellow-dark"></i><span class="text-sm font-medium text-slate-700">Missões concluídas</span></div>
+              <div class="iih-chip"><i class="fa-solid fa-bolt text-brand-yellow-dark"></i><span class="text-sm font-medium text-slate-700">Desafios resolvidos</span></div>
+              <div class="iih-chip"><i class="fa-solid fa-people-group text-brand-yellow-dark"></i><span class="text-sm font-medium text-slate-700">Colaboração da equipe</span></div>
+              <div class="iih-chip"><i class="fa-solid fa-lightbulb text-brand-yellow-dark"></i><span class="text-sm font-medium text-slate-700">Criatividade e inovação</span></div>
+              <div class="iih-chip"><i class="fa-solid fa-star text-brand-yellow-dark"></i><span class="text-sm font-medium text-slate-700">Qualidade do projeto</span></div>
+              <div class="iih-chip"><i class="fa-solid fa-check-double text-brand-yellow-dark"></i><span class="text-sm font-medium text-slate-700">Validação da solução</span></div>
+              <div class="iih-chip"><i class="fa-solid fa-earth-americas text-brand-yellow-dark"></i><span class="text-sm font-medium text-slate-700">Impacto gerado</span></div>
+              <div class="iih-chip"><i class="fa-solid fa-seedling text-brand-yellow-dark"></i><span class="text-sm font-medium text-slate-700">Contribuição para os ODS</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUINTA SEÇÃO: Do treinamento ao impacto real -->
+    <section id="evolucao" class="py-20 gradient-hero relative overflow-hidden text-white">
+      <div class="absolute inset-0 opacity-25 bg-[url('images/hero-evolucao-v3.jpg')] bg-cover bg-center"></div>
+      <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-black/60 to-black/80"></div>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+        <div class="text-center max-w-3xl mx-auto mb-14">
+          <span class="badge badge-yellow mb-4"><i class="fa-solid fa-diagram-project mr-1.5"></i> Do início ao impacto</span>
+          <h2 class="font-display text-3xl sm:text-4xl font-bold mb-4">Do treinamento ao impacto real</h2>
+          <p class="text-slate-200">No HACK HUB, as equipes evoluem em três etapas. Essa evolução prepara os estudantes para resolver problemas reais com criatividade, tecnologia e colaboração.</p>
+        </div>
+        <div class="grid md:grid-cols-3 gap-8">
+          <div class="bg-white/5 border border-brand-yellow/30 rounded-2xl p-8 backdrop-blur-sm text-center">
+            <div class="w-16 h-16 rounded-2xl bg-brand-yellow text-black flex items-center justify-center text-2xl mx-auto mb-5"><i class="fa-solid fa-book-open"></i></div>
+            <h3 class="font-semibold text-lg mb-2">1. Aprender</h3>
+            <p class="text-slate-300 text-sm">Jornadas Discovery e Builder — a base de conhecimento e competências.</p>
+          </div>
+          <div class="bg-white/5 border border-brand-yellow/30 rounded-2xl p-8 backdrop-blur-sm text-center">
+            <div class="w-16 h-16 rounded-2xl bg-brand-yellow text-black flex items-center justify-center text-2xl mx-auto mb-5"><i class="fa-solid fa-hammer"></i></div>
+            <h3 class="font-semibold text-lg mb-2">2. Praticar</h3>
+            <p class="text-slate-300 text-sm">Banco HACK — desafios rápidos que treinam habilidades antes dos desafios reais.</p>
+          </div>
+          <div class="bg-white/5 border border-brand-yellow/30 rounded-2xl p-8 backdrop-blur-sm text-center">
+            <div class="w-16 h-16 rounded-2xl bg-brand-yellow text-black flex items-center justify-center text-2xl mx-auto mb-5"><i class="fa-solid fa-rocket"></i></div>
+            <h3 class="font-semibold text-lg mb-2">3. Transformar</h3>
+            <p class="text-slate-300 text-sm">HACK Challenges e HACK Festival — impacto real aplicado e reconhecido.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA FINAL -->
+    <section id="cta-final" class="py-20 bg-slate-50">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="font-display text-3xl sm:text-4xl font-bold text-slate-900 mb-4">Transforme problemas em soluções com impacto real.</h2>
+        <p class="text-slate-600 text-lg mb-8 max-w-2xl mx-auto">Organize sua equipe, comece a Jornada HACK e acompanhe sua evolução no Índice de Impacto HACK.</p>
+        <div class="flex flex-wrap justify-center gap-4">
+          <a href="clube.html" class="btn-primary px-8 py-3.5 rounded-lg font-semibold inline-flex items-center gap-2">Começar pelo Clube <i class="fa-solid fa-arrow-right text-sm"></i></a>
+          <a href="app/login.html" class="btn-accent px-8 py-3.5 rounded-lg font-semibold inline-flex items-center gap-2">Acessar o HACK HUB</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="footer-placeholder"></div>
+
+  <script src="js/common.js"></script>
+</body>
+</html>

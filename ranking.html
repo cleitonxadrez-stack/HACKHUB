@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="images/logo-hackhub.png">
+  <title>Ranking HACK — Equipes e Escolas | HACK HUB®</title>
+  <meta name="description" content="Ranking público do Ecossistema HACK BRASIL: acompanhe em tempo real os Pontos de Impacto (Jornada Discovery) e Pontos HACK (Banco HACK) de todas as equipes e escolas.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="ranking">
+
+  <div id="header-placeholder"></div>
+
+  <main>
+    <!-- HERO -->
+    <section class="gradient-hero relative overflow-hidden">
+      <div class="absolute inset-0 opacity-20 bg-[url('images/hero-ranking-v4.jpg')] bg-cover bg-center"></div>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-16 relative text-center">
+        <div class="max-w-3xl mx-auto fade-in-up text-white">
+          <span class="badge badge-yellow mb-5"><i class="fa-solid fa-trophy mr-1.5"></i> Ranking público e em tempo real</span>
+          <h1 class="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight mb-5">
+            Quem está na frente na Jornada HACK?
+          </h1>
+          <p class="text-lg text-slate-200 max-w-2xl mx-auto">
+            Pontos de Impacto (Jornada Discovery) + Pontos HACK (Banco HACK) somados por equipe e por escola. Aberto para todo mundo acompanhar — sem login.
+          </p>
+        </div>
+      </div>
+      <svg class="w-full text-white" viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 30L60 24C120 18 240 6 360 3C480 0 600 6 720 15C840 24 960 36 1080 39C1200 42 1320 36 1380 33L1440 30V60H1380C1320 60 1200 60 1080 60C960 60 840 60 720 60C600 60 480 60 360 60C240 60 120 60 60 60H0V30Z" fill="currentColor"/></svg>
+    </section>
+
+    <section class="py-14 sm:py-16 bg-slate-50">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <!-- Como pontuar -->
+        <div class="grid sm:grid-cols-3 gap-4 mb-10">
+          <div class="app-card text-center">
+            <div class="w-11 h-11 rounded-xl bg-black/5 text-black flex items-center justify-center text-lg mx-auto mb-2"><i class="fa-solid fa-earth-americas"></i></div>
+            <p class="text-xs text-slate-500">Pontos de Impacto</p>
+            <p class="text-sm font-semibold text-slate-800">Jornada Discovery (10 missões)</p>
+          </div>
+          <div class="app-card text-center">
+            <div class="w-11 h-11 rounded-xl bg-black/5 text-black flex items-center justify-center text-lg mx-auto mb-2"><i class="fa-solid fa-cube"></i></div>
+            <p class="text-xs text-slate-500">Pontos HACK</p>
+            <p class="text-sm font-semibold text-slate-800">Banco HACK — Fácil 10 · Médio 20 · Difícil 30</p>
+          </div>
+          <div class="app-card text-center">
+            <div class="w-11 h-11 rounded-xl bg-brand-yellow text-black flex items-center justify-center text-lg mx-auto mb-2"><i class="fa-solid fa-plus"></i></div>
+            <p class="text-xs text-slate-500">Ranking geral</p>
+            <p class="text-sm font-semibold text-slate-800">Soma dos dois = posição no ranking</p>
+          </div>
+        </div>
+
+        <!-- Loading / vazio -->
+        <div id="view-loading" class="text-center py-20">
+          <i class="fa-solid fa-spinner fa-spin text-3xl text-brand-yellow-dark mb-3"></i>
+          <p class="text-slate-500 text-sm">Carregando ranking...</p>
+        </div>
+        <div id="view-vazio" class="hidden text-center py-20 max-w-md mx-auto">
+          <div class="w-16 h-16 rounded-2xl bg-slate-100 text-slate-400 flex items-center justify-center text-2xl mx-auto mb-4"><i class="fa-solid fa-flag-checkered"></i></div>
+          <h2 class="font-display text-lg font-bold text-slate-900 mb-2">Ainda não há pontuações registradas</h2>
+          <p class="text-slate-500 text-sm">Assim que as equipes começarem a completar missões e desafios, o ranking aparece aqui.</p>
+        </div>
+
+        <!-- Conteúdo -->
+        <div id="view-ranking" class="hidden">
+
+          <!-- Tabs Equipes / Escolas -->
+          <div class="flex items-center gap-2 mb-6 border-b border-slate-200 overflow-x-auto">
+            <button data-tab-ranking="equipes" class="ranking-tab-btn active px-4 py-3 text-sm font-semibold whitespace-nowrap"><i class="fa-solid fa-people-group mr-1.5"></i> Ranking de Equipes</button>
+            <button data-tab-ranking="escolas" class="ranking-tab-btn px-4 py-3 text-sm font-semibold whitespace-nowrap"><i class="fa-solid fa-school mr-1.5"></i> Ranking de Escolas</button>
+          </div>
+
+          <!-- Painel: Equipes -->
+          <div id="ranking-panel-equipes" class="ranking-tab-panel">
+            <div id="lista-ranking-equipes" class="space-y-3"></div>
+          </div>
+
+          <!-- Painel: Escolas -->
+          <div id="ranking-panel-escolas" class="ranking-tab-panel hidden">
+            <div id="lista-ranking-escolas" class="space-y-3"></div>
+          </div>
+
+          <p class="text-center text-xs text-slate-400 mt-8"><i class="fa-solid fa-arrows-rotate mr-1"></i> Atualizado automaticamente com base nas missões e desafios concluídos. Recarregue a página para ver a versão mais recente.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-14 bg-black text-white">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="font-display text-2xl sm:text-3xl font-bold mb-4">Sua escola ainda não está no ranking?</h2>
+        <p class="text-slate-300 mb-7">Crie seu HACK CLUB, monte suas equipes e comece a somar pontos na Jornada Discovery e no Banco HACK.</p>
+        <a href="app/login.html" class="btn-accent px-7 py-3.5 rounded-lg font-semibold inline-flex items-center gap-2">Acessar o HACK HUB <i class="fa-solid fa-arrow-right text-sm"></i></a>
+      </div>
+    </section>
+  </main>
+
+  <div id="footer-placeholder"></div>
+
+  <style>
+    .ranking-tab-btn{ color:#64748B; border-bottom:2px solid transparent; transition:.15s; }
+    .ranking-tab-btn:hover{ color:#101010; }
+    .ranking-tab-btn.active{ color:#101010; border-bottom-color:#FFC800; }
+  </style>
+
+  <script src="js/common.js"></script>
+  <script src="js/app-ranking.js"></script>
+</body>
+</html>
