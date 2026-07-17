@@ -1,3 +1,0 @@
-clube_id,equipe_id,missao_atual,pontos_impacto,missoes_concluidas,status,id,gs_project_id,gs_table_name,created_at,updated_at
-test-clube-qa-001,test-equipe-qa-001,1,0,[],Não iniciado,7482c6cb-1600-481d-a374-08fedafedd8e,12c315b2-ad5c-45ab-bca1-36549e202d22,projetos_discovery,1784172815768,1784172815768
-qa-clube-teste-final-10,qa-equipe-teste-final-10,1,0,[],Não iniciado,301c021c-3316-4487-890f-89bd31bcc52b,12c315b2-ad5c-45ab-bca1-36549e202d22,projetos_discovery,1784248372399,1784248372399
