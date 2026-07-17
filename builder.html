@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="../images/logo-hackhub.png">
+  <title>Jornada HACK Builder — HACK HUB®</title>
+  <meta name="description" content="Escolha trilhas de competências (Inovação, Tecnologia, IA, Empreendedorismo, Gestão de Projetos), desbloqueie habilidades e evolua o projeto da sua equipe.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="bg-slate-50" data-page="app-builder">
+
+  <!-- TOP BAR DO APP -->
+  <header class="sticky top-0 z-40 bg-black text-white">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <a href="../index.html" class="flex items-center gap-2.5 shrink-0">
+          <span class="font-display font-bold text-base leading-tight">HACK HUB<sup class="text-[10px]">®</sup></span>
+        </a>
+        <div class="flex items-center gap-2 text-xs sm:text-sm text-white/70">
+          <i class="fa-solid fa-chevron-right text-[10px]"></i>
+          <span class="font-medium text-brand-yellow">Jornada Builder</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span id="topbar-equipe-name" class="hidden sm:inline text-sm text-white/80 truncate max-w-[200px]"></span>
+          <button id="btn-trocar-equipe" class="hidden text-xs font-semibold px-3 py-2 rounded-lg border border-white/20 hover:border-brand-yellow hover:text-brand-yellow transition-colors whitespace-nowrap">
+            <i class="fa-solid fa-people-arrows mr-1"></i> Trocar equipe
+          </button>
+          <a href="banco-hack.html" class="hidden sm:inline text-xs font-semibold px-3 py-2 rounded-lg border border-white/20 hover:border-brand-yellow hover:text-brand-yellow transition-colors whitespace-nowrap">
+            <i class="fa-solid fa-puzzle-piece mr-1"></i> Banco HACK
+          </a>
+          <a href="dashboard.html" class="hidden sm:inline text-xs font-semibold px-3 py-2 rounded-lg border border-white/20 hover:border-brand-yellow hover:text-brand-yellow transition-colors whitespace-nowrap">
+            <i class="fa-solid fa-chart-line mr-1"></i> Dashboard
+          </a>
+          <a href="clube.html" class="text-xs font-semibold px-3 py-2 rounded-lg border border-white/20 hover:border-brand-yellow hover:text-brand-yellow transition-colors whitespace-nowrap">
+            <i class="fa-solid fa-house-flag mr-1"></i> Painel do Clube
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
+
+    <!-- ============ VIEW: CARREGANDO ============ -->
+    <section id="view-loading" class="text-center py-24">
+      <i class="fa-solid fa-spinner fa-spin text-3xl text-brand-yellow-dark mb-3"></i>
+      <p class="text-slate-500 text-sm">Carregando a Jornada Builder...</p>
+    </section>
+
+    <!-- ============ VIEW: ERRO AO CARREGAR ============ -->
+    <section id="view-erro" class="hidden max-w-xl mx-auto text-center py-16">
+      <div class="w-16 h-16 rounded-2xl bg-red-50 text-red-400 flex items-center justify-center text-2xl mx-auto mb-4"><i class="fa-solid fa-triangle-exclamation"></i></div>
+      <h1 class="font-display text-xl font-bold text-slate-900 mb-2">Não foi possível carregar a jornada</h1>
+      <p class="text-slate-500 text-sm mb-6">Verifique sua conexão com a internet e tente novamente.</p>
+      <button id="btn-tentar-novamente" class="btn-accent px-6 py-3 rounded-lg font-semibold inline-flex items-center gap-2"><i class="fa-solid fa-rotate-right"></i> Tentar novamente</button>
+    </section>
+
+    <!-- ============ VIEW: SEM CLUBE ATIVO ============ -->
+    <section id="view-sem-clube" class="hidden max-w-xl mx-auto text-center py-16">
+      <div class="w-16 h-16 rounded-2xl bg-slate-100 text-slate-400 flex items-center justify-center text-2xl mx-auto mb-4"><i class="fa-solid fa-house-circle-xmark"></i></div>
+      <h1 class="font-display text-xl font-bold text-slate-900 mb-2">Nenhum clube ativo encontrado</h1>
+      <p class="text-slate-500 text-sm mb-6">Para acessar a Jornada Builder, primeiro crie ou acesse o seu HACK CLUB.</p>
+      <a href="clube.html" class="btn-accent px-6 py-3 rounded-lg font-semibold inline-flex items-center gap-2">Ir para o Painel do Clube <i class="fa-solid fa-arrow-right text-sm"></i></a>
+    </section>
+
+    <!-- ============ VIEW: SEM EQUIPE APROVADA ============ -->
+    <section id="view-sem-equipe" class="hidden max-w-xl mx-auto text-center py-16">
+      <div class="w-16 h-16 rounded-2xl bg-slate-100 text-slate-400 flex items-center justify-center text-2xl mx-auto mb-4"><i class="fa-solid fa-people-group"></i></div>
+      <h1 class="font-display text-xl font-bold text-slate-900 mb-2">Nenhuma equipe aprovada ainda</h1>
+      <p class="text-slate-500 text-sm mb-6">A Jornada Builder começa depois que uma equipe é aprovada no Painel do Clube.</p>
+      <a href="clube.html" class="btn-accent px-6 py-3 rounded-lg font-semibold inline-flex items-center gap-2">Ir para o Painel do Clube <i class="fa-solid fa-arrow-right text-sm"></i></a>
+    </section>
+
+    <!-- ============ VIEW: ESCOLHER EQUIPE ============ -->
+    <section id="view-escolher-equipe" class="hidden max-w-xl mx-auto">
+      <div class="text-center mb-8">
+        <span class="badge badge-yellow mb-3"><i class="fa-solid fa-people-group mr-1.5"></i> Escolha a equipe</span>
+        <h1 class="font-display text-2xl font-bold text-slate-900">Qual equipe vai jogar a Jornada Builder?</h1>
+      </div>
+      <div id="lista-escolher-equipe" class="space-y-3"></div>
+    </section>
+
+    <!-- ============ VIEW: DASHBOARD (trilhas) ============ -->
+    <section id="view-dashboard" class="hidden">
+      <div class="gradient-hero rounded-3xl p-6 sm:p-8 mb-8 relative overflow-hidden text-white">
+        <div class="relative flex flex-wrap items-center justify-between gap-4">
+          <div>
+            <span class="badge badge-yellow mb-2"><i class="fa-solid fa-screwdriver-wrench mr-1.5"></i> Jornada HACK Builder</span>
+            <h1 class="font-display text-2xl sm:text-3xl font-bold leading-tight"><span id="equipe-nome"></span></h1>
+            <p class="text-slate-300 text-sm mt-1">Escolha uma trilha e desbloqueie novas competências.</p>
+          </div>
+          <div class="text-right shrink-0">
+            <p id="pontos-builder" class="font-display text-3xl font-bold text-brand-yellow">0</p>
+            <p class="text-xs text-slate-300 uppercase tracking-wide">Pontos Builder</p>
+          </div>
+        </div>
+      </div>
+
+      <div id="grid-trilhas" class="grid sm:grid-cols-2 gap-5 mb-10"></div>
+
+      <div class="rounded-2xl bg-black text-white p-6 sm:p-8 flex items-center gap-6 flex-wrap justify-between">
+        <div class="flex items-center gap-5">
+          <div class="w-14 h-14 rounded-2xl bg-brand-yellow text-black flex items-center justify-center text-xl shrink-0"><i class="fa-solid fa-check-double"></i></div>
+          <div>
+            <p class="text-brand-yellow font-semibold text-sm mb-1">Resultado desta etapa</p>
+            <p class="font-medium">Equipe cada vez mais preparada para desafios reais.</p>
+          </div>
+        </div>
+        <a href="challenges.html" class="btn-accent px-6 py-3 rounded-lg font-semibold inline-flex items-center gap-2 shrink-0">Próxima etapa: HACK Challenges <i class="fa-solid fa-arrow-right text-sm"></i></a>
+      </div>
+    </section>
+
+    <!-- ============ VIEW: TRILHA (lista de competências) ============ -->
+    <section id="view-trilha" class="hidden max-w-2xl mx-auto">
+      <button id="btn-voltar-trilhas" class="text-sm font-semibold text-slate-500 hover:text-slate-800 mb-6"><i class="fa-solid fa-arrow-left mr-1.5"></i> Voltar às trilhas</button>
+      <div class="text-center mb-8">
+        <div id="trilha-icon" class="w-16 h-16 rounded-2xl bg-black text-brand-yellow flex items-center justify-center text-2xl mx-auto mb-4"></div>
+        <h1 id="trilha-titulo" class="font-display text-2xl font-bold text-slate-900 mb-2"></h1>
+        <p id="trilha-descricao" class="text-slate-500 text-sm max-w-md mx-auto"></p>
+      </div>
+      <div id="lista-competencias" class="space-y-3"></div>
+    </section>
+
+    <!-- ============ VIEW: COMPETÊNCIA (formulário / resultado) ============ -->
+    <section id="view-competencia" class="hidden max-w-xl mx-auto">
+      <button id="btn-voltar-competencia" class="text-sm font-semibold text-slate-500 hover:text-slate-800 mb-6"><i class="fa-solid fa-arrow-left mr-1.5"></i> Voltar à trilha</button>
+      <div id="competencia-conteudo"></div>
+    </section>
+
+  </main>
+
+  <!-- TOAST -->
+  <div id="toast" class="hidden fixed bottom-5 left-1/2 -translate-x-1/2 bg-black text-white px-5 py-3 rounded-full shadow-lg text-sm font-medium flex items-center gap-2 z-50"></div>
+
+  <script src="../js/app-builder.js"></script>
+</body>
+</html>

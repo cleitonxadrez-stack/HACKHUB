@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="../images/logo-hackhub.png">
+  <title>Painel do Clube — HACK HUB®</title>
+  <meta name="description" content="Crie e gerencie o seu HACK CLUB: cadastre o professor mentor, convide estudantes, forme equipes e acompanhe tudo em um só lugar.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="bg-slate-50" data-page="app-clube">
+
+  <!-- TOP BAR DO APP -->
+  <header class="sticky top-0 z-40 bg-black text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <a href="../index.html" class="flex items-center gap-2.5 shrink-0">
+          <span class="font-display font-bold text-base leading-tight">HACK HUB<sup class="text-[10px]">®</sup></span>
+        </a>
+        <div class="flex items-center gap-2 text-xs sm:text-sm text-white/70">
+          <i class="fa-solid fa-chevron-right text-[10px]"></i>
+          <span class="font-medium text-brand-yellow">Painel do Clube</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <span id="topbar-clube-name" class="hidden sm:inline text-sm text-white/80 truncate max-w-[220px]"></span>
+          <a href="discovery.html" class="hidden sm:inline text-xs font-semibold px-3 py-2 rounded-lg border border-white/20 hover:border-brand-yellow hover:text-brand-yellow transition-colors whitespace-nowrap">
+            <i class="fa-solid fa-magnifying-glass mr-1"></i> Discovery
+          </a>
+          <a href="banco-hack.html" class="hidden sm:inline text-xs font-semibold px-3 py-2 rounded-lg border border-white/20 hover:border-brand-yellow hover:text-brand-yellow transition-colors whitespace-nowrap">
+            <i class="fa-solid fa-puzzle-piece mr-1"></i> Banco HACK
+          </a>
+          <a href="builder.html" class="hidden sm:inline text-xs font-semibold px-3 py-2 rounded-lg border border-white/20 hover:border-brand-yellow hover:text-brand-yellow transition-colors whitespace-nowrap">
+            <i class="fa-solid fa-screwdriver-wrench mr-1"></i> Builder
+          </a>
+          <a href="challenges.html" class="hidden sm:inline text-xs font-semibold px-3 py-2 rounded-lg border border-white/20 hover:border-brand-yellow hover:text-brand-yellow transition-colors whitespace-nowrap">
+            <i class="fa-solid fa-handshake mr-1"></i> Challenges
+          </a>
+          <a href="dashboard.html" class="hidden sm:inline text-xs font-semibold px-3 py-2 rounded-lg border border-white/20 hover:border-brand-yellow hover:text-brand-yellow transition-colors whitespace-nowrap">
+            <i class="fa-solid fa-chart-line mr-1"></i> Dashboard
+          </a>
+          <a href="festival.html" class="hidden sm:inline text-xs font-semibold px-3 py-2 rounded-lg border border-white/20 hover:border-brand-yellow hover:text-brand-yellow transition-colors whitespace-nowrap">
+            <i class="fa-solid fa-trophy mr-1"></i> Festival
+          </a>
+          <button id="btn-sair-clube" class="hidden text-xs font-semibold px-3 py-2 rounded-lg border border-white/20 hover:border-brand-yellow hover:text-brand-yellow transition-colors whitespace-nowrap">
+            <i class="fa-solid fa-right-from-bracket mr-1"></i> Trocar clube
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
+
+    <!-- ============ VIEW: CRIAR CLUBE (quando não há clube ativo) ============ -->
+    <section id="view-criar-clube" class="hidden max-w-2xl mx-auto">
+      <div class="text-center mb-8">
+        <div class="w-16 h-16 rounded-2xl bg-black text-brand-yellow flex items-center justify-center text-2xl mx-auto mb-4"><i class="fa-solid fa-house-flag"></i></div>
+        <span class="badge badge-yellow mb-3"><i class="fa-solid fa-users mr-1.5"></i> Etapa 1 · Criando o Clube</span>
+        <h1 class="font-display text-2xl sm:text-3xl font-bold text-slate-900 mb-2">Vamos criar o seu HACK CLUB</h1>
+        <p class="text-slate-500 text-sm">Preencha as informações abaixo para configurar o clube da sua escola. Você poderá editar tudo depois.</p>
+      </div>
+
+      <form id="form-criar-clube" class="app-card space-y-5">
+        <div>
+          <label class="form-label">Nome do HACK CLUB *</label>
+          <input type="text" name="nome_clube" required class="form-input" placeholder="Ex.: HACK CLUB Escola Nova Esperança">
+        </div>
+        <div class="grid sm:grid-cols-2 gap-5">
+          <div>
+            <label class="form-label">Escola *</label>
+            <input type="text" name="escola" required class="form-input" placeholder="Nome da escola">
+          </div>
+          <div>
+            <label class="form-label">Cidade</label>
+            <input type="text" name="cidade" class="form-input" placeholder="Cidade">
+          </div>
+        </div>
+        <div class="grid sm:grid-cols-2 gap-5">
+          <div>
+            <label class="form-label">Estado (UF)</label>
+            <input type="text" name="estado" maxlength="2" class="form-input uppercase" placeholder="Ex.: SP">
+          </div>
+          <div>
+            <label class="form-label">Logo do clube (URL da imagem)</label>
+            <input type="url" name="logo_url" class="form-input" placeholder="https://... (opcional)">
+          </div>
+        </div>
+        <div>
+          <label class="form-label">Descrição do clube</label>
+          <textarea name="descricao" rows="3" class="form-textarea" placeholder="Uma breve apresentação do clube (opcional)"></textarea>
+        </div>
+        <div>
+          <label class="form-label">Instagram do clube <span class="text-slate-400 font-normal">(opcional)</span></label>
+          <input type="text" name="instagram" class="form-input" placeholder="@meuhackclub">
+        </div>
+        <button type="submit" class="btn-accent w-full py-3.5 rounded-lg font-semibold inline-flex items-center justify-center gap-2">
+          <i class="fa-solid fa-check"></i> Criar HACK CLUB
+        </button>
+      </form>
+    </section>
+
+    <!-- ============ VIEW: DASHBOARD DO CLUBE ============ -->
+    <section id="view-dashboard" class="hidden">
+
+      <!-- Cabeçalho do clube -->
+      <div id="clube-header-card" class="gradient-hero rounded-3xl p-6 sm:p-8 mb-8 relative overflow-hidden">
+        <div class="relative flex flex-wrap items-center gap-6 justify-between">
+          <div class="flex items-center gap-5">
+            <img id="clube-logo-img" src="" alt="Logo do clube" class="avatar-img w-20 h-20 sm:w-24 sm:h-24" style="display:none;">
+            <div id="clube-logo-fallback" class="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-brand-yellow text-black flex items-center justify-center text-2xl sm:text-3xl font-bold shrink-0"><i class="fa-solid fa-house-flag"></i></div>
+            <div class="text-white">
+              <span id="clube-status-badge" class="badge badge-yellow mb-2"></span>
+              <h1 id="clube-nome" class="font-display text-2xl sm:text-3xl font-bold leading-tight"></h1>
+              <p id="clube-escola" class="text-slate-300 text-sm mt-1"></p>
+            </div>
+          </div>
+          <div class="flex items-center gap-2 shrink-0">
+            <button id="btn-export-share" class="btn-outline px-5 py-2.5 rounded-lg text-sm font-semibold"><i class="fa-solid fa-share-nodes mr-1.5"></i> Exportar / Compartilhar</button>
+            <button id="btn-editar-clube" class="btn-outline px-5 py-2.5 rounded-lg text-sm font-semibold"><i class="fa-solid fa-pen-to-square mr-1.5"></i> Editar clube</button>
+          </div>
+        </div>
+        <p id="clube-descricao" class="text-slate-300 text-sm mt-5 relative max-w-3xl"></p>
+        <div id="clube-social-links" class="flex items-center gap-3 mt-3 relative"></div>
+      </div>
+
+      <!-- Estatísticas rápidas -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
+        <div class="app-card text-center">
+          <p id="stat-mentores" class="text-2xl font-bold text-slate-900">0</p>
+          <p class="text-xs text-slate-500 uppercase tracking-wide mt-1">Professores mentores</p>
+        </div>
+        <div class="app-card text-center">
+          <p id="stat-estudantes" class="text-2xl font-bold text-slate-900">0</p>
+          <p class="text-xs text-slate-500 uppercase tracking-wide mt-1">Estudantes</p>
+        </div>
+        <div class="app-card text-center">
+          <p id="stat-equipes" class="text-2xl font-bold text-slate-900">0</p>
+          <p class="text-xs text-slate-500 uppercase tracking-wide mt-1">Equipes</p>
+        </div>
+        <div class="app-card text-center">
+          <p id="stat-aprovadas" class="text-2xl font-bold text-brand-yellow-dark">0</p>
+          <p class="text-xs text-slate-500 uppercase tracking-wide mt-1">Equipes aprovadas</p>
+        </div>
+      </div>
+
+      <!-- Tabs -->
+      <div class="flex items-center gap-2 mb-6 border-b border-slate-200 overflow-x-auto">
+        <button data-tab="mentores" class="app-tab-btn active px-4 py-3 text-sm font-semibold whitespace-nowrap"><i class="fa-solid fa-chalkboard-user mr-1.5"></i> Professor Mentor</button>
+        <button data-tab="estudantes" class="app-tab-btn px-4 py-3 text-sm font-semibold whitespace-nowrap"><i class="fa-solid fa-user-group mr-1.5"></i> Estudantes</button>
+        <button data-tab="equipes" class="app-tab-btn px-4 py-3 text-sm font-semibold whitespace-nowrap"><i class="fa-solid fa-people-group mr-1.5"></i> Equipes</button>
+        <button data-tab="ranking" class="app-tab-btn px-4 py-3 text-sm font-semibold whitespace-nowrap"><i class="fa-solid fa-trophy mr-1.5"></i> Ranking</button>
+      </div>
+
+      <!-- TAB: Mentores -->
+      <div id="tab-mentores" class="app-tab-panel">
+        <div class="flex items-center justify-between mb-5 flex-wrap gap-3">
+          <h2 class="font-display text-lg font-bold text-slate-900">Professores mentores</h2>
+          <button id="btn-add-mentor" class="btn-primary px-4 py-2.5 rounded-lg text-sm font-semibold"><i class="fa-solid fa-plus mr-1.5"></i> Cadastrar professor mentor</button>
+        </div>
+        <div id="lista-mentores" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+        <p id="empty-mentores" class="hidden text-center text-slate-400 text-sm py-10">Nenhum professor mentor cadastrado ainda.</p>
+      </div>
+
+      <!-- TAB: Estudantes -->
+      <div id="tab-estudantes" class="app-tab-panel hidden">
+        <div class="flex items-center justify-between mb-5 flex-wrap gap-3">
+          <h2 class="font-display text-lg font-bold text-slate-900">Estudantes do clube</h2>
+          <button id="btn-add-estudante" class="btn-primary px-4 py-2.5 rounded-lg text-sm font-semibold"><i class="fa-solid fa-user-plus mr-1.5"></i> Convidar estudante</button>
+        </div>
+        <div id="lista-estudantes" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+        <p id="empty-estudantes" class="hidden text-center text-slate-400 text-sm py-10">Nenhum estudante convidado ainda.</p>
+      </div>
+
+      <!-- TAB: Equipes -->
+      <div id="tab-equipes" class="app-tab-panel hidden">
+        <div class="flex items-center justify-between mb-5 flex-wrap gap-3">
+          <h2 class="font-display text-lg font-bold text-slate-900">Equipes</h2>
+          <button id="btn-add-equipe" class="btn-primary px-4 py-2.5 rounded-lg text-sm font-semibold"><i class="fa-solid fa-plus mr-1.5"></i> Criar equipe</button>
+        </div>
+        <div id="lista-equipes" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        <p id="empty-equipes" class="hidden text-center text-slate-400 text-sm py-10">Nenhuma equipe criada ainda.</p>
+      </div>
+
+      <!-- TAB: Ranking -->
+      <div id="tab-ranking" class="app-tab-panel hidden">
+        <div class="flex items-center justify-between mb-2 flex-wrap gap-3">
+          <div>
+            <h2 class="font-display text-lg font-bold text-slate-900">Ranking das equipes do clube</h2>
+            <p class="text-xs text-slate-500 mt-1">Soma dos Pontos de Impacto (Jornada Discovery) + Pontos HACK (Banco HACK) de cada equipe.</p>
+          </div>
+          <a href="../ranking.html" target="_blank" rel="noopener" class="btn-outline px-4 py-2.5 rounded-lg text-sm font-semibold whitespace-nowrap"><i class="fa-solid fa-arrow-up-right-from-square mr-1.5"></i> Ver ranking público de todas as escolas</a>
+        </div>
+        <div id="lista-ranking" class="space-y-3 mt-5"></div>
+        <p id="empty-ranking" class="hidden text-center text-slate-400 text-sm py-10">Crie equipes para começar a pontuar no ranking.</p>
+      </div>
+
+      <!-- CTA próxima etapa -->
+      <div class="mt-12 rounded-2xl bg-black text-white p-6 sm:p-8 flex items-center gap-6 flex-wrap justify-between">
+        <div class="flex items-center gap-5">
+          <div class="w-14 h-14 rounded-2xl bg-brand-yellow text-black flex items-center justify-center text-xl shrink-0"><i class="fa-solid fa-check-double"></i></div>
+          <div>
+            <p class="text-brand-yellow font-semibold text-sm mb-1">Resultado desta etapa</p>
+            <p class="font-medium">Clube criado e equipes prontas para iniciar a jornada.</p>
+          </div>
+        </div>
+        <a href="discovery.html" class="btn-accent px-6 py-3 rounded-lg font-semibold inline-flex items-center gap-2 shrink-0">Próxima etapa: Discovery <i class="fa-solid fa-arrow-right text-sm"></i></a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- MODAL ROOT (genérico) -->
+  <div id="modal-root" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div id="modal-backdrop" class="absolute inset-0 bg-black/60"></div>
+    <div id="modal-box" class="relative bg-white rounded-2xl shadow-2xl w-full max-w-lg max-h-[88vh] overflow-y-auto"></div>
+  </div>
+
+  <!-- Toast -->
+  <div id="toast" class="hidden fixed bottom-6 right-6 z-[60] bg-black text-white px-5 py-3 rounded-xl shadow-2xl text-sm font-medium flex items-center gap-2"></div>
+
+  <style>
+    .app-tab-btn{ color: #64748B; border-bottom: 3px solid transparent; margin-bottom: -1px; }
+    .app-tab-btn.active{ color: var(--hh-black); border-bottom-color: var(--hh-yellow); }
+  </style>
+
+  <script src="../js/app-clube.js"></script>
+</body>
+</html>
