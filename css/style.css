@@ -1,0 +1,583 @@
+/* ==========================================================================
+   HACK HUB® — Estilos globais
+   Paleta: Preto + Amarelo + Branco (identidade Ecossistema HACK BRASIL)
+   ========================================================================== */
+
+:root{
+  --hh-black: #101010;
+  --hh-black-soft: #1C1C1C;
+  --hh-yellow: #FFC800;
+  --hh-yellow-dark: #E0A800;
+  --hh-yellow-light: #FFF3CC;
+  --hh-gray: #64748B;
+}
+
+*{
+  scroll-behavior: smooth;
+}
+
+body{
+  font-family: 'Poppins', sans-serif;
+  color: #101010;
+  background-color: #FFFFFF;
+}
+
+.font-display{
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar{ width: 10px; }
+::-webkit-scrollbar-track{ background: #F1F5F9; }
+::-webkit-scrollbar-thumb{ background: var(--hh-yellow); border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover{ background: var(--hh-yellow-dark); }
+
+/* Gradiente do Hero */
+.gradient-hero{
+  background: linear-gradient(135deg, #050505 0%, #1a1a1a 55%, #0a0a0a 100%);
+  position: relative;
+}
+.gradient-hero::before{
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 85% 20%, rgba(255,200,0,0.18) 0%, rgba(255,200,0,0) 55%);
+  pointer-events: none;
+}
+
+.gradient-text{
+  background: linear-gradient(90deg, var(--hh-yellow), var(--hh-yellow-dark));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Classes de identidade preto/amarelo */
+.text-brand-yellow{ color: var(--hh-yellow-dark); }
+.bg-brand-yellow{ background-color: var(--hh-yellow); }
+.text-brand-dark{ color: var(--hh-black); }
+.bg-brand-dark{ background-color: var(--hh-black); }
+.text-brand-yellow-dark{ color: var(--hh-yellow-dark); }
+.hover\:text-brand-yellow-dark:hover{ color: var(--hh-yellow-dark); }
+.hover\:text-brand-yellow:hover{ color: var(--hh-yellow); }
+.hover\:bg-brand-yellow:hover{ background-color: var(--hh-yellow); }
+
+/* Cards */
+.journey-card{
+  transition: transform .25s ease, box-shadow .25s ease;
+  border: 1px solid #EEF2F7;
+}
+.journey-card:hover{
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px -12px rgba(16,16,16,0.18);
+}
+
+.link-underline{
+  position: relative;
+}
+
+.nav-link.active{
+  color: var(--hh-black);
+  font-weight: 700;
+  position: relative;
+}
+.nav-link.active::after{
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: -22px;
+  height: 3px;
+  background: var(--hh-yellow);
+  border-radius: 2px;
+}
+
+/* Botões */
+.btn-primary{
+  background-color: var(--hh-black);
+  color: var(--hh-yellow);
+  transition: background-color .2s ease, transform .2s ease, color .2s ease;
+}
+.btn-primary:hover{
+  background-color: #000;
+  color: var(--hh-yellow);
+  transform: translateY(-2px);
+}
+.btn-accent{
+  background-color: var(--hh-yellow);
+  color: var(--hh-black);
+  transition: background-color .2s ease, transform .2s ease;
+}
+.btn-accent:hover{
+  background-color: var(--hh-yellow-dark);
+  transform: translateY(-2px);
+}
+.btn-accent:disabled,
+.btn-accent[disabled]{
+  opacity: .65;
+  cursor: not-allowed;
+  transform: none !important;
+}
+.btn-outline{
+  border: 2px solid #fff;
+  color: #fff;
+  transition: all .2s ease;
+}
+.btn-outline:hover{
+  background-color: var(--hh-yellow);
+  border-color: var(--hh-yellow);
+  color: var(--hh-black);
+}
+
+/* Badges */
+.badge{
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+}
+.badge-yellow{ background: var(--hh-yellow); color: var(--hh-black); }
+.badge-dark{ background: var(--hh-black); color: var(--hh-yellow); }
+
+/* Animação de entrada */
+.fade-in-up{
+  animation: fadeInUp .6s ease both;
+}
+@keyframes fadeInUp{
+  from{ opacity: 0; transform: translateY(16px); }
+  to{ opacity: 1; transform: translateY(0); }
+}
+
+/* Skeleton loading */
+.skeleton{
+  background: linear-gradient(90deg, #F1F5F9 25%, #E2E8F0 37%, #F1F5F9 63%);
+  background-size: 400% 100%;
+  animation: skeleton-loading 1.4s ease infinite;
+}
+@keyframes skeleton-loading{
+  0%{ background-position: 100% 50%; }
+  100%{ background-position: 0 50%; }
+}
+
+/* Menu mobile */
+#mobile-menu{
+  transition: max-height .3s ease;
+  overflow: hidden;
+}
+
+/* Esconde a barra de rolagem do menu de navegação (evita listra amarela do scrollbar) */
+.no-scrollbar{
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.no-scrollbar::-webkit-scrollbar{
+  display: none;
+  height: 0;
+  width: 0;
+}
+
+/* Barra de progresso */
+.progress-track{
+  background: #E2E8F0;
+  border-radius: 999px;
+  overflow: hidden;
+  height: 10px;
+}
+.progress-fill{
+  background: linear-gradient(90deg, var(--hh-black), var(--hh-yellow));
+  height: 100%;
+  border-radius: 999px;
+  transition: width .4s ease;
+}
+.progress-track.on-dark{
+  background: rgba(255,255,255,0.15);
+}
+.progress-track.on-dark .progress-fill{
+  background: var(--hh-yellow);
+}
+
+/* Logo lockup */
+.logo-icon{
+  background: linear-gradient(145deg, #FFD23F, var(--hh-yellow) 60%, var(--hh-yellow-dark));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--hh-black);
+}
+
+/* Jornada horizontal (linha do tempo) */
+.journey-timeline{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0;
+}
+.journey-step{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  flex: 1;
+  min-width: 120px;
+  position: relative;
+}
+.journey-step-icon{
+  width: 64px;
+  height: 64px;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  margin-bottom: 0.75rem;
+  border: 3px solid var(--hh-yellow);
+  background: var(--hh-black);
+  color: var(--hh-yellow);
+  transition: transform .2s ease;
+}
+.journey-step:hover .journey-step-icon{
+  transform: scale(1.08);
+  background: var(--hh-yellow);
+  color: var(--hh-black);
+}
+.journey-arrow{
+  color: var(--hh-yellow-dark);
+  font-size: 1.25rem;
+  flex-shrink: 0;
+  padding: 0 0.5rem;
+}
+@media (max-width: 1024px){
+  .journey-timeline{ flex-direction: column; }
+  .journey-arrow{ transform: rotate(90deg); padding: 0.5rem 0; }
+}
+
+/* Indicadores do IIH */
+.iih-chip{
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: #fff;
+  border: 1px solid #EEF2F7;
+  border-radius: 0.85rem;
+  padding: 0.9rem 1rem;
+  transition: box-shadow .2s ease, transform .2s ease;
+}
+.iih-chip:hover{
+  box-shadow: 0 12px 24px -10px rgba(16,16,16,0.15);
+  transform: translateY(-3px);
+}
+
+/* ==========================================================================
+   Metodologia IIH — dimensões, ODS, selos e mockup de resultado
+   ========================================================================== */
+
+/* Barra de peso de dimensão */
+.dim-bar-track{
+  background: #E2E8F0;
+  border-radius: 999px;
+  overflow: hidden;
+  height: 8px;
+  width: 100%;
+}
+.dim-bar-fill{
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--hh-yellow-dark), var(--hh-yellow));
+}
+
+/* Caixa de fórmula */
+.formula-box{
+  background: var(--hh-black);
+  border: 1px solid rgba(255,200,0,0.35);
+  border-radius: 1rem;
+  color: var(--hh-yellow);
+  font-family: 'Poppins', monospace;
+  padding: 1.25rem 1.5rem;
+  overflow-x: auto;
+}
+
+/* Tags de ODS (diretos / indiretos) */
+.ods-tag{
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.3rem 0.65rem 0.3rem 0.3rem;
+  border-radius: 999px;
+  background: #F1F5F9;
+  color: #334155;
+  border: 1px solid #E2E8F0;
+}
+.ods-dot{
+  width: 1.35rem;
+  height: 1.35rem;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 0.62rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.ods-tag.ods-indirect{
+  background: var(--hh-yellow-light);
+  border-color: #FDE68A;
+}
+
+/* Cartões de nível de profundidade */
+.depth-card{
+  border-radius: 1.25rem;
+  padding: 1.75rem;
+  transition: transform .25s ease, box-shadow .25s ease;
+  border: 1px solid #EEF2F7;
+  background: #fff;
+}
+.depth-card:hover{
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px -14px rgba(16,16,16,0.16);
+}
+.depth-card.depth-highlight{
+  background: var(--hh-black);
+  color: #fff;
+  border: 2px solid var(--hh-yellow);
+}
+
+/* Selos de impacto (Bronze / Prata / Ouro / Diamante) */
+.tier-card{
+  border-radius: 1.25rem;
+  padding: 1.75rem;
+  background: #fff;
+  border: 1px solid #EEF2F7;
+  text-align: center;
+  transition: transform .25s ease, box-shadow .25s ease;
+  position: relative;
+  overflow: hidden;
+}
+.tier-card:hover{
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px -14px rgba(16,16,16,0.18);
+}
+.tier-card::before{
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 5px;
+}
+.tier-bronze::before{ background: linear-gradient(90deg,#CD7F32,#E3A469); }
+.tier-silver::before{ background: linear-gradient(90deg,#9CA3AF,#E5E7EB); }
+.tier-gold::before{ background: linear-gradient(90deg,#D4A017,var(--hh-yellow)); }
+.tier-diamond::before{ background: linear-gradient(90deg,#38BDF8,#818CF8); }
+.tier-medal{
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  margin: 0 auto 1rem;
+}
+.tier-bronze .tier-medal{ background: linear-gradient(145deg,#E3A469,#CD7F32); color: #fff; }
+.tier-silver .tier-medal{ background: linear-gradient(145deg,#E5E7EB,#9CA3AF); color: #334155; }
+.tier-gold .tier-medal{ background: linear-gradient(145deg,#FFE27A,#D4A017); color: #4A2E00; }
+.tier-diamond .tier-medal{ background: linear-gradient(145deg,#93E5FF,#6C7BFA); color: #fff; }
+
+/* Mockup de tela de resultado (celular/painel) */
+.result-mockup{
+  background: #fff;
+  border-radius: 1.5rem;
+  border: 1px solid #EEF2F7;
+  box-shadow: 0 30px 60px -20px rgba(16,16,16,0.25);
+  overflow: hidden;
+}
+.result-mockup-header{
+  background: var(--hh-black);
+  color: #fff;
+  padding: 1.5rem;
+}
+.dim-result-row{
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.25rem 1rem;
+  align-items: center;
+}
+
+/* Selo/quote de marketing */
+.pitch-quote{
+  border-left: 4px solid var(--hh-yellow);
+  background: var(--hh-yellow-light);
+  border-radius: 0 1rem 1rem 0;
+  padding: 1.75rem 2rem;
+}
+
+/* ==========================================================================
+   App HACK HUB — Painel do Clube (formulários, cards, avatares)
+   ========================================================================== */
+
+.form-label{
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #334155;
+  margin-bottom: 0.35rem;
+  display: block;
+}
+.form-input, .form-select, .form-textarea{
+  width: 100%;
+  border: 1px solid #E2E8F0;
+  border-radius: 0.65rem;
+  padding: 0.65rem 0.9rem;
+  font-size: 0.875rem;
+  background: #fff;
+  transition: border-color .2s ease, box-shadow .2s ease;
+  font-family: 'Poppins', sans-serif;
+}
+.form-input:focus, .form-select:focus, .form-textarea:focus{
+  outline: none;
+  border-color: var(--hh-yellow-dark);
+  box-shadow: 0 0 0 3px rgba(255,200,0,0.25);
+}
+
+.app-card{
+  background: #fff;
+  border: 1px solid #EEF2F7;
+  border-radius: 1.25rem;
+  padding: 1.5rem;
+}
+
+.avatar-img{
+  border-radius: 9999px;
+  object-fit: cover;
+  border: 2px solid #fff;
+  box-shadow: 0 2px 8px rgba(16,16,16,0.18);
+  flex-shrink: 0;
+}
+
+.team-strip{
+  height: 7px;
+  border-radius: 1.25rem 1.25rem 0 0;
+  margin: -1.5rem -1.5rem 1.25rem -1.5rem;
+}
+
+.chip-btn{
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 0.4rem 0.85rem;
+  border-radius: 999px;
+  border: 1px solid #E2E8F0;
+  background: #fff;
+  color: #334155;
+  cursor: pointer;
+  transition: all .2s ease;
+}
+.chip-btn:hover{ border-color: var(--hh-yellow-dark); color: var(--hh-black); }
+.chip-btn.active{ background: var(--hh-black); color: var(--hh-yellow); border-color: var(--hh-black); }
+
+.member-row{
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 0.75rem;
+  border-radius: 0.75rem;
+  border: 1px solid #EEF2F7;
+}
+.member-row:hover{ background: #FAFAFA; }
+
+/* ==========================================================================
+   App HACK HUB — Página pública do clube (media kit / compartilhamento)
+   ========================================================================== */
+
+.social-pill{
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  background: #F1F5F9;
+  color: #334155;
+  transition: all .2s ease;
+}
+.social-pill:hover{ background: var(--hh-yellow); color: var(--hh-black); }
+
+.public-hero-card{
+  background: linear-gradient(135deg, #050505 0%, #1a1a1a 55%, #0a0a0a 100%);
+  border-radius: 1.75rem;
+  position: relative;
+  overflow: hidden;
+}
+.public-hero-card::before{
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 85% 15%, rgba(255,200,0,0.18) 0%, rgba(255,200,0,0) 55%);
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   App HACK HUB — Banco HACK (desafios, etapas, resultado do IIH)
+   ========================================================================== */
+
+.desafio-card{
+  background: #fff;
+  border: 1px solid #EEF2F7;
+  border-radius: 1.25rem;
+  padding: 1.5rem;
+  transition: transform .2s ease, box-shadow .2s ease;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.desafio-card:hover{ transform: translateY(-5px); box-shadow: 0 18px 36px -14px rgba(16,16,16,0.18); }
+.desafio-card.is-resolvido{ border-color: #BBF7D0; }
+
+.etapa-dots{ display:flex; align-items:center; gap:0.5rem; }
+.etapa-dot{ width:2rem; height:2rem; border-radius:9999px; display:flex; align-items:center; justify-content:center; font-size:0.72rem; font-weight:700; background:#E2E8F0; color:#94A3B8; flex-shrink:0; }
+.etapa-dot.is-done{ background:#22C55E; color:#fff; }
+.etapa-dot.is-current{ background: var(--hh-black); color: var(--hh-yellow); }
+.etapa-line{ flex:1; height:2px; background:#E2E8F0; }
+.etapa-line.is-done{ background:#22C55E; }
+
+.opcao-selecionavel{
+  display:flex; align-items:flex-start; gap:0.65rem;
+  padding:0.75rem 1rem; border:1px solid #E2E8F0; border-radius:0.85rem;
+  cursor:pointer; transition: all .2s ease;
+}
+.opcao-selecionavel:hover{ border-color: var(--hh-yellow-dark); }
+.opcao-selecionavel input:checked ~ span{ font-weight:700; color: var(--hh-black); }
+.opcao-selecionavel.is-checked{ border-color: var(--hh-yellow-dark); background: var(--hh-yellow-light); }
+
+/* Selo de nível de dificuldade (Fácil/Médio/Difícil) */
+.nivel-tag{
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+.nivel-tag.nivel-facil{ background:#DCFCE7; color:#15803D; }
+.nivel-tag.nivel-medio{ background:#FEF3C7; color:#B45309; }
+.nivel-tag.nivel-dificil{ background:#FEE2E2; color:#B91C1C; }
+.nivel-tag .nivel-dot{ width:0.4rem; height:0.4rem; border-radius:9999px; background:currentColor; }
+
+/* Impressão / Salvar como PDF (ficha pública do clube) */
+@media print{
+  .no-print{ display: none !important; }
+  body{ background: #fff !important; }
+  .public-hero-card{
+    background: #101010 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .app-card, .member-row{ break-inside: avoid; }
+  a{ color: inherit !important; text-decoration: none !important; }
+}
