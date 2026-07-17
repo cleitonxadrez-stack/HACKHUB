@@ -1,0 +1,51 @@
+<header id="site-header" class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-100 shadow-sm">
+  <div class="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-20">
+      <!-- Logo -->
+      <a href="index.html" class="flex items-center gap-2.5 shrink-0" aria-label="HACK HUB - Página inicial">
+        <span class="font-display font-bold text-xl leading-tight text-slate-900 tracking-tight">HACK HUB<sup class="text-xs align-super">®</sup></span>
+      </a>
+
+      <!-- Desktop nav -->
+      <nav class="hidden lg:flex items-center gap-4 xl:gap-6 mx-2 overflow-x-auto no-scrollbar" aria-label="Navegação principal">
+        <a href="index.html" data-nav="home" class="nav-link link-underline text-[13px] xl:text-sm font-medium text-slate-700 whitespace-nowrap">Início</a>
+        <a href="clube.html" data-nav="clube" class="nav-link link-underline text-[13px] xl:text-sm font-medium text-slate-700 whitespace-nowrap">Criando o Clube</a>
+        <a href="discovery.html" data-nav="discovery" class="nav-link link-underline text-[13px] xl:text-sm font-medium text-slate-700 whitespace-nowrap">Jornada Discovery</a>
+        <a href="builder.html" data-nav="builder" class="nav-link link-underline text-[13px] xl:text-sm font-medium text-slate-700 whitespace-nowrap">Jornada Builder</a>
+        <a href="banco-hack.html" data-nav="banco-hack" class="nav-link link-underline text-[13px] xl:text-sm font-medium text-slate-700 whitespace-nowrap">Banco HACK</a>
+        <a href="challenges.html" data-nav="challenges" class="nav-link link-underline text-[13px] xl:text-sm font-medium text-slate-700 whitespace-nowrap">HACK Challenges</a>
+        <a href="festival.html" data-nav="festival" class="nav-link link-underline text-[13px] xl:text-sm font-medium text-slate-700 whitespace-nowrap">HACK Festival</a>
+        <a href="iih.html" data-nav="iih" class="nav-link link-underline text-[13px] xl:text-sm font-medium text-slate-700 whitespace-nowrap">Índice IIH</a>
+        <a href="ranking.html" data-nav="ranking" class="nav-link link-underline text-[13px] xl:text-sm font-medium text-slate-700 whitespace-nowrap"><i class="fa-solid fa-trophy mr-1 text-brand-yellow-dark"></i>Ranking</a>
+      </nav>
+
+      <!-- Auth area desktop -->
+      <div id="nav-auth-area" class="hidden lg:flex items-center gap-3 shrink-0">
+        <a href="app/login.html" class="btn-accent px-5 py-2.5 rounded-lg text-sm font-semibold whitespace-nowrap">Acessar o HACK HUB</a>
+      </div>
+
+      <!-- Mobile toggle -->
+      <button id="mobile-menu-btn" class="lg:hidden w-10 h-10 flex items-center justify-center rounded-lg text-slate-700 hover:bg-slate-100" aria-label="Abrir menu" aria-expanded="false">
+        <i class="fa-solid fa-bars text-xl"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <nav id="mobile-menu" class="lg:hidden max-h-0 border-t border-slate-100" aria-label="Navegação móvel">
+    <div class="px-4 py-4 space-y-1">
+      <a href="index.html" data-nav="home" class="nav-link block px-3 py-2.5 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">Início</a>
+      <a href="clube.html" data-nav="clube" class="nav-link block px-3 py-2.5 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">Criando o Clube</a>
+      <a href="discovery.html" data-nav="discovery" class="nav-link block px-3 py-2.5 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">Jornada Discovery</a>
+      <a href="builder.html" data-nav="builder" class="nav-link block px-3 py-2.5 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">Jornada Builder</a>
+      <a href="banco-hack.html" data-nav="banco-hack" class="nav-link block px-3 py-2.5 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">Banco HACK</a>
+      <a href="challenges.html" data-nav="challenges" class="nav-link block px-3 py-2.5 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">HACK Challenges</a>
+      <a href="festival.html" data-nav="festival" class="nav-link block px-3 py-2.5 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">HACK Festival</a>
+      <a href="iih.html" data-nav="iih" class="nav-link block px-3 py-2.5 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">Índice IIH</a>
+      <a href="ranking.html" data-nav="ranking" class="nav-link block px-3 py-2.5 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50"><i class="fa-solid fa-trophy mr-1.5 text-brand-yellow-dark"></i>Ranking</a>
+      <div id="nav-auth-area-mobile" class="pt-3 border-t border-slate-100 mt-2">
+        <a href="app/login.html" class="btn-accent block text-center px-5 py-2.5 rounded-lg text-sm font-semibold">Acessar o HACK HUB</a>
+      </div>
+    </div>
+  </nav>
+</header>
